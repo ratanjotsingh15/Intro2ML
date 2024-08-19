@@ -1,0 +1,8 @@
+def main():
+    st.title("JobSwift: Accelerating Careers With AI-Powered Applications")  
+    option = st.sidebar.selectbox("Select Option", ["Generate Resume", "Generate Cover Letter", "Generate Interview Questions"]) 
+
+
+
+if __name__ == "__main__":  
+    main()
