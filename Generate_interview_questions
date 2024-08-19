@@ -1,0 +1,25 @@
+#1 If the option selected is Generate Interview Questions
+
+elif option == "Generate Interview Questions":  
+        st.subheader("Generate Interview Questions")
+        skills = st.text_area("Enter your skills")
+
+
+
+#2 Now to introduce a generate button clicking which interview questions should be displayed.
+
+if st.button("Generate"):
+            if skills:
+                interview_questions = generate_interview_questions(skills)
+                st.write(interview_questions)
+            else:
+                st.warning("Please enter your skills.")
+
+
+
+#3 defining the generate_interview_questions function to call the model
+
+def generate_interview_questions (skills):
+    prompt = f"Interview Preparation Questions Based on Skills: {skills}"
+    response = palm.generate_text(model=model_name, prompt=prompt)
+    return response.result
