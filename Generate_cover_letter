@@ -1,0 +1,26 @@
+#1 If the option selected is Generate Cover Letter
+
+elif option == "Generate Cover Letter":  
+        st.subheader("Generate Cover Letter")
+        company_name = st.text_input("Enter the company name")
+        job_title = st.text_input("Enter the job title")
+
+
+
+#2 Now to introduce a generate button clicking which cover letter should be created.
+
+if st.button("Generate"):
+            if company_name and job_title:
+                cover_letter = generate_cover_letter(company_name, job_title) 
+                st.write(cover_letter)
+            else:
+                st.warning("Please fill in all the fields.")
+
+
+
+#3 defining the generate_cover_letter function to call the model
+
+def generate_cover_letter(company_name, job_title):
+    prompt = f"Dear Hiring Manager, \n\nI am writing to express my interest in the {job_title} position at {company_name}."
+    response = palm.generate_text(model=model_name, prompt=prompt)
+    return response.result
