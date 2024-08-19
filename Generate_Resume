@@ -1,0 +1,31 @@
+#1 If the option selected is Generate Resume
+
+if option == "Generate Resume":
+        st.subheader("Generate Resume")
+        name = st.text_input("Enter your name")
+        experience = st.number_input("Enter your years of experience", min_value=0, step=1)
+        skills = st.text_area("Enter your skills")
+        projects = st.text_area("Enter your projects")
+        education = st.text_area("Enter your education")
+        awards = st.text_area("Enter your awards and recognition")
+
+
+
+#2 Now to introduce a generate button clicking which resume should be created.
+
+if st.button("Generate"): 
+                if name and experience and skills and projects and education and awards:
+                    resume = generate_resume(name, experience, skills, projects, education, awards)
+                    st.write(resume)
+                else:
+                    st.warning("Please fill in all the fields.")
+
+
+
+#3 defining the generate_resume function to call the model
+
+def generate_resume(name, experience, skills, projects, education, awards):
+    prompt = f"My name is {name}. I have {experience} years of experience in {skills}."
+    prompt += f"\n\nProjects:\n{projects}\n\nEducation:\n{education}\n\nAwards and Recognition:\n{awards}"
+    response = palm.generate_text(model=model_name, prompt=prompt)
+    return response.result
